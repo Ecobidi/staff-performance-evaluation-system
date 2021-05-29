@@ -1,0 +1,56 @@
+<%-include ("partials/top") %>
+<div class="row space">
+  <div class="col-12 d-flex justify-content-between align-items-center underline pb-2 mb-4">
+    <h3 class="title text-white text-center">Add New Task</h3>
+  </div>
+  <div class="col-12">
+    <form action="/tasks/new" method="POST">
+      <div>
+        <% if (error_msg && error_msg.length > 0) { %>
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <strong><%= error_msg %></strong> 
+          </div>
+          <script>
+            $(".alert").alert();
+          </script>
+        <% } %>
+      </div>
+
+      <fieldset class="border p-2 rounded row text-white">
+        <legend>Task Details</legend>
+
+        <div class="form-group col-md-6">
+          <label>Task Title: <strong class="text-danger">*</strong></label>
+          <input required type="text" class="form-control" name="title">
+        </div>
+
+        <div class="form-group col-md-6">
+          <label>Brief Description: <strong class="text-danger">*</strong></label>
+          <textarea class="form-control" name="description"></textarea>
+        </div>
+
+        <div class="form-group col-md-6">
+          <label>Employee: </label>
+          <input disabled type="text" class="form-control text-danger font-weight-bold" value='<%= employee.surname + ", " + employee.other_names  + " - (" + employee.designation + ") at " + employee.department + " department" %>'>
+          <input type="hidden" class="form-control" name="assigned_to" value='<%= employee._id %>'>
+        </div>
+        
+        <div class="form-group col-md-3">
+          <label>Date Due: <strong class="text-danger">*</strong></label>
+          <input required type="date" class="form-control" name="due_date">
+        </div>
+
+      </fieldset>
+      <div class="form-group mt-4">
+        <button class="btn btn-success form-control" type="submit">Create New Task</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+</main>
+
+<%-include ("partials/bottom") %>

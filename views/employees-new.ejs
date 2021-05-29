@@ -1,0 +1,71 @@
+<%-include ("partials/top") %>
+  <div class="row space">
+    <div class="col-12">
+      <form action="/employees/new" method="POST" enctype="multipart/form-data">
+        <div>
+          <% if (error_msg && error_msg.length > 0) { %>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <strong><%= error_msg %></strong> 
+            </div>
+            <script>
+              $(".alert").alert();
+            </script>
+          <% } %>
+        </div>
+        
+        <fieldset class="border p-2 rounded row text-white">
+          <legend>Employee Details</legend>
+          <div class="form-group col-md-4">
+            <label>Surname: <strong class="text-danger">*</strong></label>
+            <input required type="text" class="form-control" name="surname">
+          </div>
+          <div class="form-group col-md-8">
+            <label>Other Names: <strong class="text-danger">*</strong></label>
+            <input required type="text" class="form-control" name="other_names">
+          </div>
+          <div class="form-group col-md-3">
+            <label>Gender: <strong class="text-danger">*</strong></label>
+            <select class="form-control" name="gender" required>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+
+          <div class="form-group col-md-5">
+            <label>Department: <strong class="text-danger">*</strong></label>
+            <select class="form-control" name="department" required>
+              <option>Select Department</option>
+              <% departments.forEach(d => { %>
+                <option value='<%= d.name %>'><%= d.name %></option>
+              <% }) %>
+            </select>
+          </div>
+
+          <div class="form-group col-md-4">
+            <label>Designation: <strong class="text-danger">*</strong></label>
+            <select class="form-control" name="designation" required>
+              <option>Select Designation</option>
+              <% designations.forEach(d => { %>
+                <option value='<%= d.name %>'><%= d.name %></option>
+              <% }) %>
+            </select>
+          </div>
+
+          <div class="form-group col-md-5">
+            <label>Profile Photo: </label>
+            <input type="file" name="photo" class="form-control">
+          </div>
+        </fieldset>
+        <div class="form-group mt-4">
+          <button class="btn btn-success form-control" type="submit">Add Employee</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</main>
+
+<%-include ("partials/bottom") %>
